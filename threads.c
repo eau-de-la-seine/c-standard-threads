@@ -15,6 +15,7 @@
 
 #ifdef __unix__
 	#define thrd_errno errno
+	typedef void*(*POSIX_START_ROUTINE)(void*);
 #endif /* __unix__ */
 
 #ifdef _WIN32
@@ -44,13 +45,13 @@ int thrd_create(__OUT__ thrd_t* thr, thrd_start_t func, void* arg) {
 	#endif /* __unix__ */
 
 	#ifdef _WIN32
-		*thr = CreateThread( 
-            NULL,                   		// default security attributes
-            0,                      		// use default stack size  
-            (LPTHREAD_START_ROUTINE) func,	// thread function name
-            arg,							// argument to thread function 
-            0,                      		// use default creation flags 
-            NULL							// returns the thread identifier 
+		*thr = CreateThread(
+			NULL,							// default security attributes
+			0,								// use default stack size
+			(LPTHREAD_START_ROUTINE) func,	// thread function name
+			arg,							// argument to thread function
+			0,								// use default creation flags
+			NULL							// returns the thread identifier
 		);
 		
 		/* ERROR: Setting standard errno with windows error value */
@@ -211,7 +212,7 @@ int thrd_join(thrd_t thr, __OUT__ int* res) {
 void thrd_yield(void) {
 	#ifdef __unix__
 		int value = pthread_yield();
-		
+
 		/* ERROR: Setting standard errno with posix value returned from function */
 		if (value != 0) {
 			errno = value;

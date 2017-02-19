@@ -5,7 +5,6 @@
 	#include <pthread.h>
 	typedef pthread_t thrd_t;
 	typedef pthread_mutex_t mtx_t;
-	typedef void*(*POSIX_START_ROUTINE)(void*);
 #endif /* __unix__ */
 #ifdef _WIN32
 	#include <windows.h>
