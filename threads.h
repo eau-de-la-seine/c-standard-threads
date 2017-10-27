@@ -2,6 +2,8 @@
 #define C11_THREADS_HEADER
 
 #ifdef __unix__
+	/* _GNU_SOURCE for pthread_yield() */
+	#define _GNU_SOURCE
 	#include <pthread.h>
 	typedef pthread_t thrd_t;
 	typedef pthread_mutex_t mtx_t;

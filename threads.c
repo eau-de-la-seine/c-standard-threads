@@ -35,7 +35,7 @@
 */
 int thrd_create(__OUT__ thrd_t* thr, thrd_start_t func, void* arg) {
 	#ifdef __unix__
-		int value = pthread_create(&thr, NULL, (POSIX_START_ROUTINE) func, arg);
+		int value = pthread_create(thr, NULL, (POSIX_START_ROUTINE) func, arg);
 		
 		/* ERROR: Setting standard errno with posix value returned from function */
 		if (value != 0) {
@@ -264,7 +264,7 @@ int mtx_init(__OUT__ mtx_t* mutex, int type) {
 			pthread_mutexattr_t properties;
 			pthread_mutexattr_init(&properties);
 			pthread_mutexattr_settype(&properties, PTHREAD_MUTEX_RECURSIVE);
-			value = pthread_mutex_init(mutex, properties);
+			value = pthread_mutex_init(mutex, &properties);
 		} else if (type == mtx_plain) {
 			value = pthread_mutex_init(mutex, NULL);
 		} else {

@@ -23,3 +23,6 @@ Working in progress functions:
 
 	thrd_sleep
 	mtx_timedlock
+
+Under Linux, use:
+	gcc -pthread -o threads.h threads.c main.c
