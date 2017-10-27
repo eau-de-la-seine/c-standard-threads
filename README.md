@@ -25,4 +25,5 @@ Working in progress functions:
 	mtx_timedlock
 
 Under Linux, use:
-	gcc -pthread -o threads.h threads.c main.c
+	gcc threads.c main.c -o Program.out -pthread
+	./Program.out
